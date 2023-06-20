@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from jose import jwt
 
 app = Flask(__name__)
+@app.route('/dummy', methods=['GET'])
+def dummy():
+    return {"dummy":"ok"}
 
 def verify_jwt_token(token, public_key):
     try:
