@@ -12,9 +12,9 @@ def verify_jwt_token(token, public_key):
         decoded_token = jwt.decode(token, public_key, algorithms=['HS256'])
         return decoded_token
     except jwt.ExpiredSignatureError:
-        return {"error": "Le token JWT a expiré."}
+        return {"valid":False,"error": "Le token JWT a expiré."}
     except jwt.JWTError:
-        return {"error": "Le token JWT est invalide."}
+        return {"valid":False,"error": "Le token JWT est invalide."}
 
 @app.route('/verify', methods=['POST'])
 def verify_token():
