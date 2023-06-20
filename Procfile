@@ -1,1 +1,1 @@
-web: gunicorn your_script_name:app
+web: gunicorn jwt-api:app
