@@ -20,19 +20,26 @@ jobs:
           fetch-depth: 0
       - name: Setup Python
         uses: actions/setup-python@v3
+        
       - name : virtual environnement
         uses : syphar/restore-virtualenv@v1
-      - name: Upgrade pip
-        run: pip install --upgrade pip
-      - name: Install tox and any other packages
-        run: pip install tox
-      - name: Install requirements
-        run: pip install -r requirements.txt
+        
       - name: restore  
         uses: syphar/restore-pip-download-cache@v1
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+        
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+        
+      - name: Install tox and any other packages
+        run: pip install tox
+        
+      - name: Install requirements
+        run: pip install -r requirements.txt
+        
       - name: Run tox
         run: tox -e py
+        
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
         env:
