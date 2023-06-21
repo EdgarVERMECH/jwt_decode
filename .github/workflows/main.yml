@@ -19,9 +19,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python }}
+        uses: actions/setup-python@v3
+      - name : virtual environnement
+        uses : syphar/restore-virtualenv@v1
       - name: Upgrade pip
         run: pip install --upgrade pip
       - name: Install tox and any other packages
