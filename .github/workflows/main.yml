@@ -29,7 +29,8 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip show Flask
-          python -m unittest jwt_test.py
+          python -m coverage run -m unittest jwt_test.py
+          python -m coverage report
         
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
