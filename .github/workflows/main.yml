@@ -30,7 +30,7 @@ jobs:
           echo "VIRTUAL ENV:" $VIRTUAL_ENV
           pip install tox
           pip install -r requirements.txt
-          tot -e py
+          tox -e py
         
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
