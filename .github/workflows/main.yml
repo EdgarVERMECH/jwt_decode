@@ -28,6 +28,9 @@ jobs:
         run: pip install tox
       - name: Install requirements
         run: pip install -r requirements.txt
+      - name: restore  
+        uses: syphar/restore-pip-download-cache@v1
+        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
       - name: Run tox
         run: tox -e py
       - name: Analyze with SonarCloud
