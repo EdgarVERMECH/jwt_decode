@@ -29,6 +29,6 @@ def verify_token():
     else:
         return {"valid":False,"error": "Le token JWT n'est pas valide."}
     
-
+#pragma: no cover
 if __name__ == '__main__':
     app.run()
