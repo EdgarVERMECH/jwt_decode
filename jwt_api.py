@@ -11,9 +11,7 @@ def verify_jwt_token(token, public_key):
         # Vérification de la signature du token JWT en utilisant la clé publique
         decoded_token = jwt.decode(token, public_key, algorithms=['HS256'])
         return decoded_token
-    except jwt.ExpiredSignatureError:
-        return False
-    except jwt.JWTError:
+    except :
         return False
 
 
@@ -30,6 +28,7 @@ def verify_token():
         return {"valid":True,"message": "Le token JWT est valide.", "payload": decoded_payload}
     else:
         return {"valid":False,"error": "Le token JWT n'est pas valide."}
+    
 
 if __name__ == '__main__':
     app.run()

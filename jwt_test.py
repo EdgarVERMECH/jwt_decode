@@ -45,5 +45,25 @@ class TestYourFlaskApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"valid": True, "message": "Le token JWT est valide.", "payload": payload})
 
+    def test_verify_token_endpoint_with_expired_token(self):
+       
+        public_key = "mspr_dolib@arr_edgar_edgar_lynda_pierre_alexandre"
+        #Mauvais token jwt
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJSZXZlbmRldXJNc3ByIiwiZG9sYXBpa2V5IjoiUmV2ZW5kZXVybXNwciJ9.8REvlfrZBprNgrAbEzYCZL2wNYgzfzZxScKOYqLeHs"
+
+        response = self.client.post('/verify', json={"token": token})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"valid": False, "error": "Le token JWT n'est pas valide."})
+
+    # @patch('your_flask_app.verify_jwt_token')
+    # def test_verify_token_endpoint_with_invalid_signature(self, mock_verify):
+    #     mock_verify.side_effect = jwt.JWTError  # Forcer la fonction à lancer une exception JWTError
+
+    #     response = self.client.post('/verify', json={"token": "dummy"})
+
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(response.get_json(), {"valid": False, "error": "Le token JWT est invalide."})
+
 if __name__ == '__main__':
     unittest.main()
