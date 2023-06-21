@@ -23,13 +23,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Run commands
-        run: |
-          python3.11 -m venv env
-          source env/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          pip show Flask
-          python -m unittest jwt_test.py
+        run: python -m unittest jwt_test.py
         
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
