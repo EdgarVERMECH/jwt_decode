@@ -1,1 +1,1 @@
-web: gunicorn jwt-api:app
+web: gunicorn jwt_api:app
