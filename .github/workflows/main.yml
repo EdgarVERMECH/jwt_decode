@@ -28,6 +28,7 @@ jobs:
           source env/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
+          pip install coverage
           pip show Flask
           python -m coverage run -m unittest jwt_test.py
           python -m coverage report
