@@ -19,26 +19,18 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Python
-        uses: actions/setup-python@v3
-        
-      - name : virtual environnement
-        uses : syphar/restore-virtualenv@v1
-        
-      - name: restore  
-        uses: syphar/restore-pip-download-cache@v1
-        if: steps.cache-virtualenv.outputs.cache-hit != 'true'
-        
-      - name: Upgrade pip
-        run: pip install --upgrade pip
-        
-      - name: Install tox and any other packages
-        run: pip3 install tox
-        
-      - name: Install requirements
-        run: pip3 install -r requirements.txt
-        
-      - name: Run tox
-        run: tox -e py
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Run commands
+        run: |
+          pip install --upgrade pip
+          python3.8 -m venv env
+          source env/bin/activate
+          echo "VIRTUAL ENV:" $VIRTUAL_ENV
+          pip install tox
+          pip install -r requirements.txt
+          tot -e py
         
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
